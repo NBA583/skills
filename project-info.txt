@@ -1,0 +1,18 @@
+Project Name: Skills
+
+Technologies:
+    HTML5, CSS3, TS/JS
+    JS Framework: 
+        Angular - Version 17
+    UI Framework:
+        Angular Material
+    Testing Framework:
+        Jest
+
+Project developed using below things:
+    1. Angular V17
+    2. Angular Material
+        Stepper, Progress-bar, Table, Expansion Panel, Form fields, Datepicker, dialogs & etc
+    3. Reactive Forms
+    4. Data sharing among components using Signals & Computed.
+    5. Jest : JavaScript Testing Framework

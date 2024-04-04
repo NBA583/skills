@@ -1,0 +1,28 @@
+Project Requirement: 
+    ● Build a multi-step form component for a job application process
+        ○ Create a form with multiple steps (e.g., Personal Information, Work Experience, Education and Skills).
+        ○ Implement a way to navigate between steps.
+        ○ Provide a clear indication of the current step and progress.
+        ○ Include form fields relevant to each step. For example,
+            ■ Personal Information may include name, email, and phone number, languageknown etc.
+            ■ Work Experience may include company name, start date, end date, role, etc
+            ■ Education may include Institution name, type of institution, degree obtained, date, etc
+            ■ Skills may include Skill, Skill level, etc
+        ○ The candidates must be allowed to make multiple entries for their Work experience, education and skills.
+    ● Validation and Error Handling:
+        ○ Implement validation for each step. Show appropriate error messages if required fields are not filled out.
+        ○ Allow users to go back to previous steps and correct errors.
+    ● UI/UX Design:
+        ○ Apply styling to make the form visually appealing.
+        ○ Ensure a user-friendly and intuitive interface.
+        ○ Use animations or transitions to enhance the user experience. (Optional)
+    ● Code Quality:
+        ○ Follow UI/JS Framework best practices.
+        ○ Organize the component and related code efficiently.
+        ○ Include comments for clarity.
+    ● Technology Stack
+        ○ Client Side - HTML5, CSS3, JS, other frameworks.
+        ○ SCM - Github (Keep check-in and provide decent commit messages)
+        ○ Server Side (Optional)- Any RDBMS/NoSql, any platform, any app/web server
+        ○ Deployment (Optional) - Can use any
+        
