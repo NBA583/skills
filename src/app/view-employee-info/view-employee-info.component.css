@@ -1,0 +1,35 @@
+.example-action-buttons {
+    padding-bottom: 20px;
+}
+
+.example-headers-align {
+    margin: 10px;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+    justify-content: space-between;
+    align-items: center;
+}
+
+.example-headers-align .mat-mdc-form-field+.mat-mdc-form-field {
+    margin-left: 8px;
+}
+
+.formView {
+    display: flex;
+    div {
+        width: 25%;
+        h5 {
+            border-bottom: 1px dotted #000;
+            color: black;
+            font-weight: 500;
+        }
+    }
+}
+
+.mat-expansion-panel-header[aria-disabled=true] .mat-expansion-panel-header-title {
+    color: black;
+}
+.mat-expansion-panel-spacing {
+    margin: 6px 0px;
+}

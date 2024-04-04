@@ -1,0 +1,58 @@
+<div class="m-5 example-container" align="center">
+    <h2>Add Organization Information</h2>
+    <form [formGroup]="workExperienceFormGroup">
+        <!-- <mat-form-field appearance="outline"> -->
+            <!-- <mat-label>Current Organization</mat-label> -->
+            <input matInput formControlName="currentOrganization" style="display:none">
+            <mat-slide-toggle #currentOrganization formControlName="currentOrganization" (click)="isCurrentOrganization(currentOrganization.checked)"
+             style="display: flex;margin-left: 20px;">Current Organization</mat-slide-toggle>
+        <!-- </mat-form-field> -->
+        <br>
+        <mat-form-field appearance="outline">
+            <mat-label>Organization Name</mat-label>
+            <input matInput placeholder="Organization name" formControlName="orgName" required />
+            @if(workExperienceFormGroup.get('orgName')?.hasError('required') &&
+            workExperienceFormGroup.get('orgName')?.touched){
+            <mat-error>Organization Name is required</mat-error>
+            }
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Role</mat-label>
+            <input matInput placeholder="Role" formControlName="role" />
+            @if(workExperienceFormGroup.get('role')?.hasError('required') &&
+            workExperienceFormGroup.get('role')?.touched){
+            <mat-error>Role is required</mat-error>
+            }
+        </mat-form-field>
+        <mat-form-field appearance="outline" (click)="startDatePicker.open()">
+            <mat-label>Start Date</mat-label>
+            <input matInput class="input-dp-id" [matDatepicker]="startDatePicker" readonly required 
+                formControlName="startDate" (dateChange)="addEvent('change', $event)">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #startDatePicker disabled="false"></mat-datepicker>
+            @if(workExperienceFormGroup.get('startDate')?.hasError('required') &&
+            workExperienceFormGroup.get('startDate')?.touched){
+            <mat-error>Start Date is required</mat-error>
+            }
+        </mat-form-field>
+        @if(!workExperienceFormGroup.get('currentOrganization')?.value){
+            <mat-form-field appearance="outline" (click)="endDatePicker.open()">
+                <mat-label>End Date</mat-label>
+                <input matInput [matDatepicker]="endDatePicker" readonly [required]="!currentOrganization.checked" formControlName="endDate"
+                [min]="minDate" >
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+                <mat-datepicker #endDatePicker disabled="false"></mat-datepicker>
+                @if(workExperienceFormGroup.get('endDate')?.hasError('required') &&
+                workExperienceFormGroup.get('endDate')?.touched){
+                <mat-error>End Date is required</mat-error>
+                }
+            </mat-form-field>
+        }
+    </form>
+</div>
+<div class="footer-actions">
+    <button mat-raised-button color="warn" style="margin-left: 80px;" (click)="onNoClick()">Cancel</button>
+    <button mat-raised-button color="primary" style="margin-left: 80px;" (click)="onAdd()" [disabled]="workExperienceFormGroup.invalid">{{action}}</button>
+</div>

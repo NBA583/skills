@@ -1,0 +1,9 @@
+.example-container mat-form-field {
+    margin-left: 10px;
+    margin-top: 5px;
+    width: 90%;
+}
+.footer-actions {
+    bottom: 30px;
+    position: absolute;
+}

@@ -1,0 +1,67 @@
+<div class="m-5 example-container" align="center">
+    <h2>Add Skills Information</h2>
+    <form [formGroup]="skillFormGroup">
+        <mat-form-field appearance="outline">
+            <mat-label>Skill</mat-label>
+            <input matInput placeholder="Skill" formControlName="skill" required />
+            @if(skillFormGroup.get('skill')?.hasError('required') &&
+            skillFormGroup.get('skill')?.touched){
+            <mat-error>Skill is required</mat-error>
+            }
+            @if(skillFormGroup.get('skill')?.hasError('invalid') &&
+            skillFormGroup.get('skill')?.touched){
+            <mat-error>Enter Valid Skill</mat-error>
+            }
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Level</mat-label>
+            <mat-select formControlName="level" name="level">
+                @for (level of levels; track level) {
+                <mat-option [value]="level">{{level}}</mat-option>
+                }
+            </mat-select>
+            @if(skillFormGroup.get('level')?.hasError('required') &&
+            skillFormGroup.get('level')?.touched){
+            <mat-error>Level is required</mat-error>
+            }
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Software Version</mat-label>
+            <input matInput placeholder="Software Version" formControlName="softwareVersion" />
+            @if(skillFormGroup.get('softwareVersion')?.hasError('required') &&
+            skillFormGroup.get('softwareVersion')?.touched){
+            <mat-error>Software Version is required</mat-error>
+            }
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Experience(Years)</mat-label>
+            <input type="number" matInput placeholder="Experience" formControlName="experience" />
+            @if(skillFormGroup.get('experience')?.hasError('required') &&
+            skillFormGroup.get('experience')?.touched){
+            <mat-error>Experience is required</mat-error>
+            }
+            @if(skillFormGroup.get('experience')?.hasError('invalid') &&
+            skillFormGroup.get('experience')?.touched){
+            <mat-error>Enter Valid Experience</mat-error>
+            }
+        </mat-form-field>
+        <mat-form-field appearance="outline" (click)="lastUsedPicker.open()">
+            <mat-label>Last Used</mat-label>
+            <input matInput [matDatepicker]="lastUsedPicker" readonly required formControlName="lastUsed">
+            <mat-hint>MM/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="lastUsedPicker"></mat-datepicker-toggle>
+            <mat-datepicker #lastUsedPicker disabled="false" startView="multi-year"
+                  (monthSelected)="setMonthAndYear($event, lastUsedPicker)"
+                  panelClass="example-month-picker"></mat-datepicker>
+            @if(skillFormGroup.get('lastUsed')?.hasError('required') &&
+            skillFormGroup.get('lastUsed')?.touched){
+            <mat-error>Last Used is required</mat-error>
+            }
+        </mat-form-field>
+    </form>
+</div>
+<div class="footer-actions">
+    <button mat-raised-button color="warn" style="margin-left: 150px;" (click)="onNoClick()">Cancel</button>
+    <button mat-raised-button color="primary" style="margin-left: 150px;" (click)="onAdd()"
+        [disabled]="skillFormGroup.invalid">{{action}}</button>
+</div>

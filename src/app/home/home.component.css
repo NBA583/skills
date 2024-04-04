@@ -1,0 +1,19 @@
+/* .example-container mat-form-field + mat-form-field {
+    margin-left: 10px;
+  } */
+  .example-container mat-form-field {
+    margin-left: 10px;
+    margin-top: 10px;
+    width: 30%;
+}
+.example-container mat-form-field.example-chip-list {
+    margin-left: 10px;
+    margin-top: 10px;
+    width: 92%;
+}
+.center {
+    text-align: center;
+    button {
+        margin: 10px;
+    }
+}

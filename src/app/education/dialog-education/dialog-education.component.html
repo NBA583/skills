@@ -1,0 +1,81 @@
+<div class="m-5 example-container" align="center">
+    <h2>Add Education Information</h2>
+    <form [formGroup]="educationFormGroup">
+        <mat-form-field appearance="outline">
+            <mat-label>Education</mat-label>
+            <input matInput placeholder="Education" formControlName="education" required />
+            @if(educationFormGroup.get('education')?.hasError('required') &&
+            educationFormGroup.get('education')?.touched){
+            <mat-error>Education is required</mat-error>
+            }
+            @if(educationFormGroup.get('education')?.hasError('invalid') &&
+            educationFormGroup.get('education')?.touched){
+            <mat-error>Enter Valid Education</mat-error>
+            }
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Institute Name</mat-label>
+            <input matInput placeholder="Institute Name" formControlName="instituteName" />
+            @if(educationFormGroup.get('instituteName')?.hasError('required') &&
+            educationFormGroup.get('instituteName')?.touched){
+            <mat-error>Institute Name is required</mat-error>
+            }
+            @if(educationFormGroup.get('instituteName')?.hasError('invalid') &&
+            educationFormGroup.get('instituteName')?.touched){
+            <mat-error>Enter Valid Institute Name</mat-error>
+            }
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Course</mat-label>
+            <input matInput placeholder="Course" formControlName="course" />
+            @if(educationFormGroup.get('course')?.hasError('required') &&
+            educationFormGroup.get('course')?.touched){
+            <mat-error>Course is required</mat-error>
+            }
+            @if(educationFormGroup.get('course')?.hasError('invalid') &&
+            educationFormGroup.get('course')?.touched){
+            <mat-error>Enter Valid Course</mat-error>
+            }
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Specialization</mat-label>
+            <input matInput placeholder="Specialization" formControlName="specialization" />
+            @if(educationFormGroup.get('specialization')?.hasError('required') &&
+            educationFormGroup.get('specialization')?.touched){
+            <mat-error>Specialization is required</mat-error>
+            }
+            @if(educationFormGroup.get('specialization')?.hasError('invalid') &&
+            educationFormGroup.get('specialization')?.touched){
+            <mat-error>Enter Valid Specialization</mat-error>
+            }
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Percentage</mat-label>
+            <input matInput placeholder="Percentage" formControlName="percentage" />
+            @if(educationFormGroup.get('percentage')?.hasError('required') &&
+            educationFormGroup.get('percentage')?.touched){
+            <mat-error>Percentage is required</mat-error>
+            }
+            @if(educationFormGroup.get('percentage')?.hasError('invalid') &&
+            educationFormGroup.get('percentage')?.touched){
+            <mat-error>Enter Valid Percentage</mat-error>
+            }
+        </mat-form-field>
+        <mat-form-field appearance="outline" (click)="yearPassedOutPicker.open()">
+            <mat-label>Year Passed</mat-label>
+            <input matInput [matDatepicker]="yearPassedOutPicker" readonly required 
+                formControlName="yearPassedOut">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="yearPassedOutPicker"></mat-datepicker-toggle>
+            <mat-datepicker #yearPassedOutPicker disabled="false"></mat-datepicker>
+            @if(educationFormGroup.get('yearPassedOut')?.hasError('required') &&
+            educationFormGroup.get('yearPassedOut')?.touched){
+            <mat-error>Year Passed is required</mat-error>
+            }
+        </mat-form-field>
+    </form>
+</div>
+<div class="footer-actions">
+    <button mat-raised-button color="warn" style="margin-left: 150px;" (click)="onNoClick()">Cancel</button>
+    <button mat-raised-button color="primary" style="margin-left: 150px;" (click)="onAdd()" [disabled]="educationFormGroup.invalid">{{action}}</button>
+</div>

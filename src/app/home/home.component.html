@@ -1,0 +1,150 @@
+<div style="text-align: right;">
+    <button mat-button color="accent" (click)="viewEmpInfo()">View Employee Information</button>
+</div>
+<mat-progress-bar mode="determinate" [value]="derivedProgress()"></mat-progress-bar>
+
+<mat-horizontal-stepper [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="personalInfoFormGroup">
+        <form [formGroup]="personalInfoFormGroup">
+            <ng-template matStepLabel>Personal Information</ng-template>
+            <div class="mt-3 px-4 example-container">
+                <mat-form-field appearance="outline">
+                    <mat-label>First Name</mat-label>
+                    <input matInput placeholder="First name" formControlName="firstName" required />
+                    @if(personalInfoFormGroup.get('firstName')?.hasError('required') &&
+                    personalInfoFormGroup.get('firstName')?.touched){
+                    <mat-error>First Name is required</mat-error>
+                    }
+                    @if(personalInfoFormGroup.get('firstName')?.hasError('invalid') &&
+                    personalInfoFormGroup.get('firstName')?.touched){
+                    <mat-error>Enter Valid First Name</mat-error>
+                    }
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Middle Name</mat-label>
+                    <input matInput placeholder="Middle name" formControlName="middleName" />
+                    @if(personalInfoFormGroup.get('middleName')?.hasError('required') &&
+                    personalInfoFormGroup.get('middleName')?.touched){
+                    <mat-error>Middle Name is required</mat-error>
+                    }
+                    @if(personalInfoFormGroup.get('middleName')?.hasError('invalid') &&
+                    personalInfoFormGroup.get('middleName')?.touched){
+                    <mat-error>Enter Valid Middle Name</mat-error>
+                    }
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Last Name</mat-label>
+                    <input matInput placeholder="Last name" formControlName="lastName" />
+                    @if(personalInfoFormGroup.get('lastName')?.hasError('required') &&
+                    personalInfoFormGroup.get('lastName')?.touched){
+                    <mat-error>Last Name is required</mat-error>
+                    }
+                    @if(personalInfoFormGroup.get('lastName')?.hasError('invalid') &&
+                    personalInfoFormGroup.get('lastName')?.touched){
+                    <mat-error>Enter Valid Last Name</mat-error>
+                    }
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Gender</mat-label>
+                    <input matInput formControlName="gender" style="display:none" required>
+                    <mat-radio-group formControlName="gender">
+                        <mat-radio-button value="Male">Male</mat-radio-button>
+                        <mat-radio-button value="Female">Female</mat-radio-button>
+                    </mat-radio-group>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input matInput placeholder="Email" formControlName="email" />
+                    @if(personalInfoFormGroup.get('email')?.hasError('required') &&
+                    personalInfoFormGroup.get('email')?.touched){
+                    <mat-error>Email is required</mat-error>
+                    }
+                    @if(personalInfoFormGroup.get('email')?.hasError('invalid') &&
+                    personalInfoFormGroup.get('email')?.touched){
+                    <mat-error>Enter Valid Email</mat-error>
+                    }
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Mobile Number</mat-label>
+                    <input matInput placeholder="Mobile Number" formControlName="mobile" />
+                    @if(personalInfoFormGroup.get('mobile')?.hasError('required') &&
+                    personalInfoFormGroup.get('mobile')?.touched){
+                    <mat-error>Mobile Number is required</mat-error>
+                    }
+                    @if(personalInfoFormGroup.get('mobile')?.hasError('invalid') &&
+                    personalInfoFormGroup.get('mobile')?.touched){
+                    <mat-error>Enter Valid Mobile Number</mat-error>
+                    }
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="example-chip-list">
+                    <mat-label>Languages Known</mat-label>
+                    <mat-chip-grid #chipGrid aria-label="Enter languages" formControlName="knownLanguages">
+                        @for (language of languages; track language) {
+                        <mat-chip-row (removed)="remove(language)" [editable]="language.name !== 'English'"
+                            (edited)="edit(language, $event)"
+                            [aria-description]="'press enter to edit ' + language.name">
+                            {{language.name}}
+                            @if(language.name !== 'English' ){
+                            <button matChipRemove [attr.aria-label]="'remove ' + language.name">
+                                <mat-icon>cancel</mat-icon>
+                            </button>
+                            }
+                        </mat-chip-row>
+                        }
+                        <input class="input-language-id" placeholder="Add new language..." [matChipInputFor]="chipGrid"
+                            [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                            (matChipInputTokenEnd)="add($event)" />
+                    </mat-chip-grid>
+                    @if(personalInfoFormGroup.get('knownLanguages')?.hasError('required') &&
+                    personalInfoFormGroup.get('knownLanguages')?.touched){
+                    <mat-error>Languages Known is required</mat-error>
+                    }
+                </mat-form-field>
+
+            </div>
+            <div class="center">
+                <button mat-raised-button color="primary" matStepperNext>Next</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step [stepControl]="workExperienceFormGroup">
+        <form [formGroup]="workExperienceFormGroup">
+            <ng-template matStepLabel>Work Experience</ng-template>
+            <app-work-experience #WorkExperienceComponent (updateWEFG)="updateWEFG($event)"></app-work-experience>
+            <div class="center">
+                <button mat-raised-button color="primary" matStepperPrevious>Back</button>
+                <button mat-raised-button color="primary" matStepperNext>Next</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step [stepControl]="educationFormGroup">
+        <form [formGroup]="educationFormGroup">
+            <ng-template matStepLabel>Education</ng-template>
+            <app-education #EducationComponent (updateEFG)="updateEFG($event)"></app-education>
+
+            <div class="center">
+                <button mat-raised-button color="primary" matStepperPrevious>Back</button>
+                <button mat-raised-button color="primary" matStepperNext>Next</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step [stepControl]="skillsFormGroup">
+        <form [formGroup]="skillsFormGroup">
+            <ng-template matStepLabel>Skills</ng-template>
+            <app-skill #SkillComponent (updateSFG)="updateSFG($event)"></app-skill>
+
+            <div class="center">
+                <button mat-raised-button color="primary" matStepperPrevious>Back</button>
+                <button mat-raised-button color="primary" (click)="viewEmpInfo()">Next</button>
+            </div>
+        </form>
+    </mat-step>
+    <!-- <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      You are now done.
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>
+    </mat-step> -->
+</mat-horizontal-stepper>

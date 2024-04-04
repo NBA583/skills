@@ -1,0 +1,130 @@
+<div align="right">
+    <button mat-raised-button color="warn" style="margin-left: 20px;" (click)="onNoClick()">Close</button>
+</div>
+<div class="example-action-buttons">
+    <!-- <button mat-button (click)="accordion.openAll()">Expand All</button>
+    <button mat-button (click)="accordion.closeAll()">Collapse All</button> -->
+</div>
+<mat-accordion class="example-headers-align" multi>
+    <mat-expansion-panel [expanded]="true" [disabled]="false">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Personal Information
+            </mat-panel-title>
+            <mat-panel-description>
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="formView">
+            @for(personal of personalInfoColumns;track personal){
+            <div>
+                <h5>{{personal.label}}</h5>
+                <span>{{(personalInfoEnabled) ? personalInfo[personal.key] : '--'}}</span>
+            </div>
+            }
+        </div>
+    </mat-expansion-panel>
+    <mat-expansion-panel [expanded]="false" [disabled]="false">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Work Experience
+            </mat-panel-title>
+            <mat-panel-description>
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        @if(workExperienceInfoEnabled){
+        @for(workExperience of workExperienceInfo;track workExperience;let i = $index){
+        <div class="formView">
+            @for(columnWE of workExperienceInfoColumns;track columnWE;){
+            <div>
+                @if(i === 0){
+                <h5>{{columnWE.label}}</h5>
+                }
+                <span>{{(workExperienceInfoEnabled) ? ((columnWE.key === 'startDate' || columnWE.key ===
+                    'endDate')?(workExperienceInfo[i][columnWE.key] | date: 'dd MMM
+                    yyyy'):(workExperienceInfo[i][columnWE.key])): '--'}}</span>
+            </div>
+            }
+        </div>
+        }
+        }
+        @if(!workExperienceInfoEnabled){
+        <div class="formView">
+            @for(columnWE of workExperienceInfoColumns;track columnWE;){
+            <div>
+                <h5>{{columnWE.label}}</h5>
+                <span>--</span>
+            </div>
+            }
+        </div>
+        }
+    </mat-expansion-panel>
+    <mat-expansion-panel [expanded]="false" [disabled]="false">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Education
+            </mat-panel-title>
+            <mat-panel-description>
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        @if(educationInfoEnabled){
+        @for(education of educationInfo;track education;let i = $index){
+        <div class="formView">
+            @for(columnE of educationInfoColumns;track columnE;){
+            <div>
+                @if(i === 0){
+                <h5>{{columnE.label}}</h5>
+                }
+                <span>{{(educationInfoEnabled) ? ((columnE.key === 'yearPassedOut')?(educationInfo[i][columnE.key] |
+                    date: 'dd MMM
+                    yyyy'):(educationInfo[i][columnE.key])): '--'}}</span>
+            </div>
+            }
+        </div>
+        }
+        }
+        @if(!educationInfoEnabled){
+        <div class="formView">
+            @for(columnE of educationInfoColumns;track columnE;){
+            <div>
+                <h5>{{columnE.label}}</h5>
+                <span>--</span>
+            </div>
+            }
+        </div>
+        }
+    </mat-expansion-panel>
+    <mat-expansion-panel [expanded]="false" [disabled]="false">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Skills
+            </mat-panel-title>
+            <mat-panel-description>
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        @if(skillInfoEnabled){
+        @for(skill of skillInfo;track skill;let i = $index){
+        <div class="formView">
+            @for(columnS of skillInfoColumns;track columnS;){
+            <div>
+                @if(i === 0){
+                <h5>{{columnS.label}}</h5>
+                }
+                <span>{{(skillInfoEnabled) ? ((columnS.key === 'lastUsed')?(skillInfo[i][columnS.key] | date: 'MMM
+                    yyyy'):(skillInfo[i][columnS.key])): '--'}}</span>
+            </div>
+            }
+        </div>
+        }
+        }
+        @if(!skillInfoEnabled){
+        <div class="formView">
+            @for(columnS of skillInfoColumns;track columnS){
+            <div>
+                <h5>{{columnS.label}}</h5>
+                <span>--</span>
+            </div>
+            }
+        </div>
+        }
+    </mat-expansion-panel>
+</mat-accordion>
